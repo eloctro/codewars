@@ -10,10 +10,10 @@ class File {
     return this._fullName;
   }
 
-  get fileName() {
+  get filename() {
     let nameSplit = this._fullName.split(".");
     let nameSlice = nameSplit.slice(0, nameSplit.length - 1);
-    let nameJoin = nameSlice.join("");
+    let nameJoin = nameSlice.join(".");
     return nameJoin;
   }
 
@@ -27,7 +27,9 @@ class File {
   }
 
   write(str) {
-    this.contents += "\n";
+    if (this.contents) {
+      this.contents += "\n";
+    }
     this.contents += str;
   }
 
@@ -44,16 +46,20 @@ class File {
   }
 }
 
-let example = new File("example.txt", "An example file");
+let example = new File(
+  "class.phptester.php",
+  "<?php /* Some PHP code here */ ?>"
+);
 
-example.fullName = 'dfs'
-example.fullName = "sdfsdf";
+example.fullName = "dfs";
 console.log(example.fullName);
 example.filename = "hacked";
 console.log(example.fileName);
 console.log(example.extension);
 console.log(example.getContents());
-example.write("good");
+example.write("Hello World");
+console.log(example.getContents());
+example.write("This is an example file provided to you by the Kata author");
 console.log(example.getContents());
 console.log(example.gets());
 console.log(example.gets());
